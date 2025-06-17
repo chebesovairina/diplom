@@ -1,0 +1,29 @@
+<!-- interview.html -->
+{% extends "base.html" %}
+
+{% block title %}Подготовка к собеседованию{% endblock %}
+
+{% block content %}
+    <!-- Основное содержимое -->
+    <div class="content">
+        <!-- Заголовок раздела и разделитель -->
+        <h2 id="section-title" class="section-title">Подготовка к собеседованию</h2>
+        <div id="section-divider" class="section-divider"></div>
+
+        <!-- Блок с опциями для собеседования -->
+        <div id="career-options" class="option-container">
+            <div class="option-card" onclick="window.location.href = '/interview/advice'">
+                <h3>Советы по собеседованию</h3>
+                <p>Рекомендации по тому, как себя вести, что ожидать и как одеваться на собеседование в интересующей сфере.</p>
+            </div>
+            <div class="option-card" onclick="window.location.href = '/interview/question'">
+                <h3>Типичные вопросы</h3>
+                <p>Список вопросов для собеседования по выбранной вакансии с анализом.</p>
+            </div>
+            <div class="option-card" onclick="window.location.href = '/interview/try'">
+                <h3>Тестовое собеседование</h3>
+                <p>Интерактивная сессия с ботом, где кандидат может практиковаться, и получать обратную связь по своим ответам.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

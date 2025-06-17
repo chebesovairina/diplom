@@ -1,0 +1,29 @@
+<!-- resume.html -->
+{% extends "base.html" %}
+
+{% block title %}Создание и оптимизация резюме{% endblock %}
+
+{% block content %}
+    <!-- Основное содержимое -->
+    <div class="content">
+        <!-- Заголовок раздела и разделитель -->
+        <h2 id="section-title" class="section-title">Создание и оптимизация резюме</h2>
+        <div id="section-divider" class="section-divider"></div>
+
+        <!-- Блок с опциями для создания резюме -->
+        <div id="resume-options" class="option-container">
+            <div class="option-card" onclick="window.location.href = '/resume/creating'">
+                <h3>Интерактивный конструктор резюме</h3>
+                <p>Помощь в создании резюме на основе ключевых слов и предпочтений пользователя.</p>
+            </div>
+            <div class="option-card" onclick="window.location.href = '/resume/analysis'">
+                <h3>Анализ и оценка резюме</h3>
+                <p>Проверка текущего резюме на соответствие лучшим практикам, рекомендации по улучшению.</p>
+            </div>
+            <div class="option-card" onclick="window.location.href = '/resume/vacancy'">
+                <h3>Сравнение с вакансией</h3>
+                <p>Оценка соответствия резюме выбранной вакансии и предложения по улучшению навыков.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

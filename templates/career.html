@@ -1,0 +1,29 @@
+<!-- career.html -->
+{% extends "base.html" %}
+
+{% block title %}Подбор вакансий и профориентация{% endblock %}
+
+{% block content %}
+    <!-- Основное содержимое -->
+    <div class="content">
+        <!-- Заголовок раздела и разделитель -->
+        <h2 id="section-title" class="section-title">Подбор вакансий и профориентация</h2>
+        <div id="section-divider" class="section-divider"></div>
+
+        <!-- Блок с опциями для профориентации -->
+        <div id="career-options" class="option-container">
+            <div class="option-card" onclick="window.location.href = '/career/test'">
+                <h3>Тест на профориентацию</h3>
+                <p>Интерактивный тест для определения интересов и направлений, к которым стоит присмотреться.</p>
+            </div>
+            <div class="option-card" onclick="window.location.href = '/career/analysis'">
+                <h3>Анализ рынка труда</h3>
+                <p>Обзор текущих тенденций и требований в интересующей сфере: информация о востребованных навыках, средних зарплатах и ключевых работодателях в интересующей отрасли.</p>
+            </div>
+            <div class="option-card" onclick="window.location.href = '/career/selection'">
+                <h3>Подбор вакансий</h3>
+                <p>Поиск возможных вакансий на основе резюме.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

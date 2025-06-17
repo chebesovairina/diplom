@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Тест на профориентацию{% endblock %}
+
+{% block content %}
+<div class="test-container">
+    <h2 class="test-title">Тест на профориентацию</h2>
+    <p class="instructions">Из каждой пары профессий выберите одну, наиболее привлекательную для вас.</p>
+    <form action="/career/test" method="POST">
+        <div class="pairs-container">
+            {% for i, pair in enumerate(pairs) %}
+            <div class="pair">
+                <label>
+                    <input type="radio" name="choice{{ i }}" value="{{ pair[0] }}" required>
+                    {{ pair[0] }}
+                </label>
+                <label>
+                    <input type="radio" name="choice{{ i }}" value="{{ pair[1] }}">
+                    {{ pair[1] }}
+                </label>
+            </div>
+            {% if not loop.last %}
+            <div class="separator"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="buttons">
+            <button type="button" onclick="window.location.href='/career'" class="button back-button">Назад</button>
+            <button type="submit" class="button submit-button">Результат</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .test-container {
+        max-width: 600px;
+        width: 100%;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .test-title {
+        text-align: center;
+        color: #2a4f96;
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+
+    .instructions {
+        font-size: 1.1em;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .pairs-container {
+        max-height: 300px;
+        overflow-y: auto;
+        width: 500px;
+        padding-right: 5px;
+    }
+
+    .pair {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+
+    .pair label {
+        width: 45%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    input[type="radio"] {
+        transform: scale(1.2);
+    }
+
+    .separator {
+        height: 1px;
+        background-color: rgba(42, 79, 150, 0.2);
+        margin: 10px 0;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .back-button {
+        background: #888;
+    }
+
+    .submit-button {
+        background: #2a4f96;
+    }
+
+    .button:hover {
+        opacity: 0.9;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Пробное интервью{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">Пробное интервью</h2>
+    <form action="/interview/try/answers" method="POST" enctype="multipart/form-data" class="form-box">
+    <input type="hidden" name="vacancy_text" value="{{ vacancy_text }}">
+    <input type="hidden" name="filename" value="{{ filename }}">
+    <input type="hidden" name="resume_path" value="{{ resume_path }}">
+    <input type="hidden" name="interview_text" value="{{ interview_text }}">
+    <div class="interview-text">
+        <p>{{ interview_text | safe }}</p>
+    </div>
+    <div class="input-section">
+        <label for="answers_text">Ответы</label>
+        <textarea id="answers_text" name="answers_text" rows="10" placeholder="После собеседования вы получите анализ своих ответов и рекомендации, как сделать их еще лучше!" required></textarea>
+        <div class="instructions">
+            <p><strong>Важно:</strong> Отвечайте самостоятельно — это поможет вам лучше подготовиться!</p>
+            <ul>
+                <li>Ошибки — это нормально. Здесь можно пробовать и учиться.</li>
+                <li>Чем больше практики, тем легче пройдет настоящее интервью.</li>
+                <li>Ваши ответы останутся конфиденциальными.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="buttons">
+        <button type="button" onclick="window.location.href='/interview'" class="button back-button">Назад</button>
+        <button type="submit" class="button submit-button">Завершить</button>
+    </div>
+    </form>
+</div>
+
+<style>
+    .form-container {
+        max-width: 600px;
+        max-height: 650px;
+        width: 100%;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+    }
+
+    .form-title {
+        text-align: center;
+        color: #2a4f96;
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+
+    .form-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input-section {
+        margin-bottom: 20px;
+    }
+
+    .interview-text {
+        background-color: rgba(42, 79, 150, 0.05);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        max-height: 200px;
+        max-width: 580px;
+        overflow-y: auto;
+    }
+
+    .input-field, textarea {
+        width: 100%;
+        padding: 20px;
+        margin-top: 5px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .back-button {
+        background: #888;
+    }
+
+    .submit-button {
+        background: #2a4f96;
+    }
+
+    .button:hover {
+        opacity: 0.9;
+    }
+</style>
+{% endblock %}

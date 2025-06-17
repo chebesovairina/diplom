@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Результат совета по собеседованию{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">Результат совета по собеседованию</h2>
+    <div class="result-section">
+        <p>{{ result_text | safe }}</p>
+    </div>
+    <div class="buttons">
+        <button type="button" onclick="window.location.href='/interview'" class="button back-button">Назад</button>
+    </div>
+</div>
+
+<style>
+    .form-container {
+        max-width: 600px;
+        width: 100%;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-title {
+        text-align: center;
+        color: #2a4f96;
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+
+    .result-section {
+        background-color: rgba(42, 79, 150, 0.05);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        max-height: 300px;
+        max-width: 580px;
+        overflow-y: auto;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .back-button {
+        background: #888;
+    }
+
+    .button:hover {
+        opacity: 0.9;
+    }
+</style>
+{% endblock %}

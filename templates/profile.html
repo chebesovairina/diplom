@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<h2 class="section-title">Настройки профиля</h2>
+<div class="section-divider"></div>
+
+<div class="profile-section">
+    <h3>Текущий аватар</h3>
+    <img src="{{ url_for('static', filename='avatars/' + current_avatar) }}" class="profile-avatar" alt="Аватар">
+
+    <h3>Выберите новый аватар</h3>
+    <form method="POST">
+        <div class="avatar-selection">
+            {% for avatar in avatars %}
+            <label>
+                <input type="radio" name="avatar" value="{{ avatar }}" required>
+                <img src="{{ url_for('static', filename='avatars/' + avatar) }}" class="avatar-option" alt="Аватар">
+            </label>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn">Сохранить изменения</button>
+    </form>
+</div>
+
+<a href="{{ url_for('logout') }}" class="logout-btn">Выйти из профиля</a>
+
+<style>
+    .profile-section {
+        text-align: center;
+    }
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
+    .avatar-selection {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .avatar-option {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+    input[type="radio"]:checked + .avatar-option {
+        border: 2px solid #2a4f96;
+    }
+    .btn {
+        padding: 10px 20px;
+        background-color: #2a4f96;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .btn:hover {
+        background-color: #1e3d72;
+    }
+    .logout-btn {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+{% endblock %}

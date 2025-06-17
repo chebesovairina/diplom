@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block title %}Создание резюме{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">Создание резюме</h2>
+    <form action="/resume/creating" method="post" enctype="multipart/form-data" class="form-box">
+        <!-- Личные данные -->
+        <div class="input-section">
+            <label for="full_name">ФИО</label>
+            <input type="text" id="full_name" name="full_name" class="input-field" placeholder="Например, Иванов Иван Иванович">
+            <p class="hint">Укажите свои полные имя, отчество и фамилию.</p>
+        </div>
+
+        <!-- Контакты -->
+        <div class="input-section">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="input-field" placeholder="example@mail.com">
+            <p class="hint">Укажите действующий адрес электронной почты для связи.</p>
+
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" class="input-field" placeholder="+7 (999) 123-45-67">
+            <p class="hint">Укажите номер телефона в международном формате.</p>
+        </div>
+
+        <!-- Должность -->
+        <div class="input-section">
+            <label for="vacancy">Желаемая должность</label>
+            <textarea id="vacancy" name="vacancy" rows="3" class="input-field" placeholder="Название должности, на которую вы претендуете..."></textarea>
+            <p class="hint">Опишите, какую позицию стремитесь занять, это сделает резюме более целенаправленным и соответствующим требованиям работодателя.</p>
+        </div>
+
+        <!-- Образование -->
+        <div class="input-section" id="education-container">
+            <label for="education_0">Образование</label>
+            <textarea id="education_0" name="education" rows="2" class="input-field" placeholder="Учебное заведение, специальность, годы обучения..."></textarea>
+            <p class="hint">Укажите учебное заведение, специальность, годы обучения.</p>
+            <button type="button" class="button add-button" onclick="addEducationField()">Добавить образование</button>
+        </div>
+
+        <!-- Опыт работы -->
+        <div class="input-section" id="experience-container">
+            <label for="work_experience_0">Опыт работы</label>
+            <textarea id="work_experience_0" name="work_experience" rows="2" class="input-field" placeholder="Компания, должность, обязанности..."></textarea>
+            <p class="hint">Заполните, если у вас есть профессиональный опыт, иначе оставьте пустым.</p>
+            <button type="button" class="button add-button" onclick="addExperienceField()">Добавить опыт работы</button>
+        </div>
+
+        <!-- Навыки -->
+        <div class="input-section">
+            <label for="skills">Навыки</label>
+            <textarea id="skills" name="skills" rows="3" class="input-field" placeholder="Например, знание языков программирования, работа с профессиональными инструментами, базами данных, а также системами управления проектами и специализированным оборудованием..."></textarea>
+            <p class="hint">Напишите свои ключевые навыки, особенно те, которые важны для желаемой позиции.</p>
+        </div>
+
+        <!-- Качества -->
+        <div class="input-section">
+            <label for="soft_skills">Качества</label>
+            <textarea id="soft_skills" name="soft_skills" rows="3" class="input-field" placeholder="Например, коммуникация, работа в команде, лидерство, тайм-менеджмент, критическое мышление, адаптивность..."></textarea>
+            <p class="hint">Напишите свои ключевые личностные качества.</p>
+        </div>
+
+        <!-- Достижения -->
+        <div class="input-section">
+            <label for="achievements">Достижения</label>
+            <textarea id="achievements" name="achievements" rows="3" class="input-field" placeholder="Например, специфические профессиональные достижения, награды, гранты или победы в конкурсах..."></textarea>
+            <p class="hint">Напишите свои достижения, которые могут добавить вес резюме.</p>
+        </div>
+
+        <!-- Дополнительная информация -->
+        <div class="input-section">
+            <label for="additional_information">Дополнительная информация</label>
+            <textarea id="additional_information" name="additional_information" rows="3" class="input-field" placeholder="Например, владении иностранными языками, знании софта и программного обеспечения..."></textarea>
+            <p class="hint">Напишите дополнительную информацию о себе, которая будут полезны для должности.</p>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="buttons">
+            <button type="button" onclick="window.location.href='/resume'" class="button back-button">Назад</button>
+            <button type="submit" class="button submit-button">Создать резюме</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .form-container {
+        max-width: 600px;
+        width: 100%;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-height: 700px;
+        overflow-y: auto;
+    }
+
+    .form-title {
+        text-align: center;
+        color: #2a4f96;
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+
+    .form-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input-section {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #2a4f96;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .input-field, textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: #f8f9fc;
+        box-sizing: border-box;
+    }
+
+    .hint {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 5px;
+        font-style: italic;
+        padding-left: 5px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .back-button {
+        background: #888;
+    }
+
+    .submit-button {
+        background: #2a4f96;
+    }
+
+    .add-button {
+        background-color: #2a4f96;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .button:hover {
+        opacity: 0.9;
+    }
+</style>
+<script>
+    let educationCount = 1; // Счетчик для образования
+    let experienceCount = 1; // Счетчик для опыта работы
+
+    function addEducationField() {
+        const educationContainer = document.getElementById('education-container');
+        const newField = document.createElement('div');
+        newField.classList.add('input-section');
+        newField.innerHTML = `
+            <label for="education_${educationCount}">Образование</label>
+            <textarea id="education_${educationCount}" name="education" rows="2" class="input-field" placeholder="Учебное заведение, специальность, годы обучения..."></textarea>
+            <p class="hint">Укажите учебное заведение, специальность, годы обучения.</p>
+        `;
+        educationContainer.appendChild(newField);
+        educationCount++; // Увеличиваем счетчик
+    }
+
+    function addExperienceField() {
+        const experienceContainer = document.getElementById('experience-container');
+        const newField = document.createElement('div');
+        newField.classList.add('input-section');
+        newField.innerHTML = `
+            <label for="work_experience_${experienceCount}">Опыт работы</label>
+            <textarea id="work_experience_${experienceCount}" name="work_experience" rows="2" class="input-field" placeholder="Компания, должность, обязанности..."></textarea>
+            <p class="hint">Заполните, если у вас есть профессиональный опыт, иначе оставьте пустым.</p>
+        `;
+        experienceContainer.appendChild(newField);
+        experienceCount++; // Увеличиваем счетчик
+    }
+</script>
+{% endblock %}

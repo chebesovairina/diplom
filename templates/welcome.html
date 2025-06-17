@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProWay - Найди свой путь</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e40af);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 90%;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            max-width: 200px;
+            margin-bottom: 10vh;
+            margin-top: -10hv;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: clamp(1em, 3vw, 2em);
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: slideIn 1.5s ease-in-out;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        p {
+            font-size: clamp(1em, 2.5vw, 1.2em);
+            margin-top: 10px;
+            opacity: 0.8;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: clamp(1em, 3vw, 1.2em);
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            background: #4f46e5;
+            transition: transform 0.3s, background 0.3s;
+            text-decoration: none;
+            min-width: 140px;
+        }
+
+        .btn:hover {
+            background: #4338ca;
+            transform: scale(1.1);
+        }
+
+        .background-text {
+            position: absolute;
+            top: 53%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(1.5em, 6vw, 2.5em);
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+            white-space: nowrap;
+            opacity: 0;
+            animation: fadeAppear 3s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeAppear {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-text">Создание резюме | Подготовка к собеседованию | Подбор вакансий</div>
+    <div class="container">
+        <img src="static/logo.png" alt="ProWay Logo" class="logo">
+        <h1>Добро пожаловать в ProWay</h1>
+        <p>Мы поможем вам найти свой путь в карьере с помощью ИИ.</p>
+        <div class="buttons">
+            <a href="/login" class="btn">Вход</a>
+            <a href="/register" class="btn">Регистрация</a>
+        </div>
+    </div>
+</body>
+</html>

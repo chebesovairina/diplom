@@ -1,0 +1,255 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Главная страница{% endblock %}</title>
+    <style>
+        /* Основные стили */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            color: #333;
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+        }
+
+        /* Стили для левого меню */
+        .sidebar {
+            width: 260px;
+            background-color: #1e3a5f;
+            color: white;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* Фотография профиля */
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 4px solid white;
+        }
+
+        /* Пункты меню */
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .menu-item {
+            padding: 15px;
+            font-size: 1.1em;
+            color: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .menu-item:hover {
+            background-color: #2d5a91;
+            transform: scale(1.05);
+        }
+
+        /* Основная рабочая область */
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: top;
+            justify-content: top;
+        }
+
+        /* Заголовок раздела */
+        .section-title {
+            font-size: 2em;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+        }
+
+        .section-divider {
+            width: 60%;
+            height: 3px;
+            background-color: #1e3a5f;
+            margin-bottom: 25px;
+            border-radius: 2px;
+        }
+
+        /* Стили для карточек */
+        .option-container {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .option-card {
+            padding: 25px;
+            width: 280px;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .option-card h3 {
+            font-size: 1.5em;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        .option-card p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Робот-помощник */
+        .robot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Сам робот */
+        .robot {
+            width: 120px;
+            height: 80px;
+            background-color: #4682B4;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        /* Глаза */
+        .eye {
+            width: 30px;
+            height: 50px;
+            background-color: white;
+            border-radius: 25px;
+            position: absolute;
+            top: 15%;
+            transition: transform 0.1s;
+        }
+
+        .eye.left {
+            left: 20%;
+        }
+
+        .eye.right {
+            right: 20%;
+        }
+
+        /* Окошко реплик */
+        .chat-box {
+            width: 200px;
+            max-width: 100%;
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 14px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        .chat-box button {
+            background: #4682B4;
+            border: none;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<div class="robot-container">
+    <div class="chat-box">
+        <p id="robot-text">{{ bot_reply }}</p>
+        <button onclick="toggleChat()">Скрыть</button>
+    </div>
+    <div class="robot">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+    </div>
+</div>
+
+<script>
+    function toggleChat() {
+        const chatBox = document.querySelector(".chat-box");
+        if (chatBox.style.display === "none") {
+            chatBox.style.display = "block";
+        } else {
+            chatBox.style.display = "none";
+        }
+    }
+
+    // Анимация движения глаз
+        document.addEventListener('mousemove', function (e) {
+            const eyes = document.querySelectorAll('.eye');
+            eyes.forEach(eye => {
+                const rect = eye.getBoundingClientRect();
+                const eyeCenterX = rect.left + rect.width / 2;
+                const eyeCenterY = rect.top + rect.height / 2;
+
+                const deltaX = e.clientX - eyeCenterX;
+                const deltaY = e.clientY - eyeCenterY;
+                const angle = Math.atan2(deltaY, deltaX);
+                const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 10);
+
+                // Перемещаем глаза
+                eye.style.transform = `translate(${distance * Math.cos(angle)}px, ${distance * Math.sin(angle)}px)`;
+            });
+        });
+</script>
+<body>
+    <div class="sidebar">
+        <a href="{{ url_for('profile') }}">
+            <div class="profile-pic" title="Редактировать профиль">
+                {% if current_avatar %}
+                    <img src="{{ url_for('static', filename='avatars/' + current_avatar) }}" alt="Аватар" style="width: 100%; height: 100%; border-radius: 50%;">
+                {% endif %}
+            </div>
+        </a>
+        <ul class="menu">
+            <li class="menu-item"><a href="{{ url_for('career') }}" style="color: inherit; text-decoration: none;">Подбор вакансий и профориентация</a></li>
+            <li class="menu-item"><a href="{{ url_for('resume') }}" style="color: inherit; text-decoration: none;">Создание и оптимизация резюме</a></li>
+            <li class="menu-item"><a href="{{ url_for('interview') }}" style="color: inherit; text-decoration: none;">Подготовка к собеседованию</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
